@@ -24,9 +24,9 @@ public class TimedLED extends Subsystem {
     	}
     	return instance;
     }*/
-    public TimedLED(int port)
+    public TimedLED(int moduleNumber, int port)
     {
-    	lightSwitch = new Solenoid(port);
+    	lightSwitch = new Solenoid(moduleNumber,port);
     	
     }
     public void light()

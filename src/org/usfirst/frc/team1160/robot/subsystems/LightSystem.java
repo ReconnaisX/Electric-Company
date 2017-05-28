@@ -8,16 +8,35 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LightSystem extends Subsystem {
 
-	public TimedLED one,two,three,four,five,six,seven,eight,nine,ten;
+	//public TimedLED one,two,three,four,five,six,seven,eight,nine,ten;
+	public TimedLED[][] array;
 	public Timer time;
 	static LightSystem instance;
 
 	private LightSystem()
 	{
-		one = new TimedLED(0);
-		two = new TimedLED(1);
-		three = new TimedLED(2);
-		four = new TimedLED(3);
+		array = new TimedLED[3][4];
+		for (int i = 0; i < 3; i++)
+		{
+			if (i == 2)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					array[i][j] = new TimedLED(i,j);
+				}
+				break;
+			}
+			for (int j = 0; j < 4; j++)
+			{
+				array[i][j] = new TimedLED(i,j);
+			}
+		}
+		/*
+		one = new TimedLED(0,0);
+		two = new TimedLED(0,1);
+		three = new TimedLED(0,2);
+		four = new TimedLED(0,3);
+		*/
 		
 		time = new Timer();
 	}
@@ -43,17 +62,39 @@ public class LightSystem extends Subsystem {
 	}
 	public void allLight()
 	{
-		one.light();
-		two.light();
-		three.light();
-		four.light();
+		for (int i = 0; i < 3; i++)
+		{
+			if (i == 2)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					array[i][j].light();
+				}
+				break;
+			}
+			for (int j = 0; j < 4; j++)
+			{
+				array[i][j].light();
+			}
+		}
 	}
 	public void allDark()
 	{
-		one.dark();
-		two.dark();
-		three.dark();
-		four.dark();
+		for (int i = 0; i < 3; i++)
+		{
+			if (i == 2)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					array[i][j].dark();
+				}
+				break;
+			}
+			for (int j = 0; j < 4; j++)
+			{
+				array[i][j].dark();
+			}
+		}
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

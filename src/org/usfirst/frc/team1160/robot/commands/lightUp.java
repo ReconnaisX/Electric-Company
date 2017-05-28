@@ -32,14 +32,34 @@ public class lightUp extends Command {
     }
     private void sequenceOne()
     {
+    	
     	Robot.lights.startTime();
-    	Robot.lights.one.light();
-    	new Wait(5);
-    	Robot.lights.two.light();
-    	new Wait(5);
-    	Robot.lights.three.light();
-    	new Wait(5);
-    	Robot.lights.allDark();
+    	Robot.lights.array[0][0].light();
+    	new Wait(50);
+    	Robot.lights.array[0][1].light();
+    	new Wait(50);
+    	Robot.lights.array[0][2].light();
+    	new Wait(50);
+    	Robot.lights.array[0][3].light();
+    	new Wait(50);
+    	Robot.lights.array[1][0].light();
+    	new Wait(50);
+    	Robot.lights.array[1][1].light();
+    	new Wait(50);
+    	Robot.lights.array[1][2].light();
+    	new Wait(50);
+    	Robot.lights.array[1][3].light();
+    	new Wait(50);
+    	Robot.lights.array[2][0].light();
+    	new Wait(50);
+    	Robot.lights.array[2][1].light();
+    	
+    	//Robot.lights.allDark();
+    	
+    	/*
+    	Robot.lights.array[1][0].light();
+    	new Wait()
+    	*/
     }
 
     // Make this return true when this Command no longer needs to run execute()
