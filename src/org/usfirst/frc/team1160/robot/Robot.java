@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1160.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1160.robot.commands.lightUp;
+import org.usfirst.frc.team1160.robot.commands.lightUpGroup;
+import org.usfirst.frc.team1160.robot.commands.light.lightUp;
 import org.usfirst.frc.team1160.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1160.robot.subsystems.LightSystem;
 
@@ -71,7 +71,17 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new lightUp();
+		
+		//lightUpGroup commands
+		//1: default sequence
+		//2: unused
+		//3: turn all lights on
+		//4: tower caterpillar
+		//5: ray caterpillar
+		//6: both caterpillar
+		
+		
+		autonomousCommand = new lightUpGroup(4,100);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
