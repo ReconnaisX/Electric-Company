@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot {
 			
 		
 		
-		autonomousCommand = new lightUpGroup(4,100);
+		autonomousCommand = new lightUpGroup(5,100);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
