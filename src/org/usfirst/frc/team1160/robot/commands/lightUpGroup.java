@@ -3,7 +3,7 @@
 import org.usfirst.frc.team1160.robot.Robot;
 import org.usfirst.frc.team1160.robot.commands.blink.blink;
 import org.usfirst.frc.team1160.robot.commands.blink.blinkAll;
-import org.usfirst.frc.team1160.robot.commands.blink.blinkTwo;
+import org.usfirst.frc.team1160.robot.commands.blink.blinkMany;
 import org.usfirst.frc.team1160.robot.commands.light.lightDark;
 import org.usfirst.frc.team1160.robot.commands.light.lightDarkAll;
 import org.usfirst.frc.team1160.robot.commands.light.lightUp;
@@ -28,25 +28,16 @@ public class lightUpGroup extends CommandGroup {
     			sequenceOne();
     			break;
     		case 2:
-    			sequenceTwo();
+    			bothDown();
     			break;
     		case 3:
-    			sequenceAll();
+    			skipLight();
     			break;
     		case 4:
-    			towerCaterpillar();
+    			clockwiseRays();
     			break;
     		case 5:
-    			rayCaterpillar();
-    			break;
-    		case 6:
     			bothCaterpillar();
-    			break;
-    		case 7:
-    			trueTowerCaterpillar();
-    			break;
-    		case 8:
-    			test();
     			break;
     			
     	}
@@ -106,7 +97,7 @@ public class lightUpGroup extends CommandGroup {
 			//blink
 			for (int j = 0; j < 3;j++)
 			{
-				addSequential(new blinkAll(1));
+				addSequential(new blinkAll(1,1));
 				addSequential(new Wait(1));
 			}
 			addSequential(new lightDarkAll());
@@ -117,63 +108,76 @@ public class lightUpGroup extends CommandGroup {
 	{
 		//for (int i = 0)
 	}
-	public void sequenceAll()
+	/*public void sequenceAll()
 	{
 		addSequential(new lightUpAll());
-	}
-	public void towerCaterpillar()
+	}*/
+	public void clockwiseRays() //tower only caterpillar (no snake, only caterpillar up) AND clockwise rays
 	{
 		
-		addSequential(new blink(0,0,0.2));
 		for (int i = 0; i < iterations; i++)
 		{
 			double waitTime = 0.2;
 			
 			//bottom tier
-			//addSequential(new blink(0,0,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,0},{0,4}},waitTime));
 			
 			//tier 2
-			addSequential(new blink(0,1,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,1},{0,5}},waitTime));
 			
 			//tier 3
-			addSequential(new blink(0,2,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,2},{0,6}},waitTime));
 			
 			//tier 4
-			addSequential(new blink(0,3,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,3},{0,7}},waitTime));
 			
 			//tier 5
-			addSequential(new blink(1,0,waitTime));
+			addSequential(new blinkMany(new int[][]{{1,0},{1,4}},waitTime));
 			
-			addSequential(new blink(0,3,waitTime));
-			addSequential(new blink(0,2,waitTime));
-			addSequential(new blink(0,1,waitTime));
-			addSequential(new blink(0,0,waitTime));
+			//tier 4 of tower, right hand side of rays, going down
+			addSequential(new blinkMany(new int[][]{{0,0},{2,5}},waitTime));
 			
+			addSequential(new blinkMany(new int[][]{{0,1},{2,4}},waitTime));
+			
+			addSequential(new blinkMany(new int[][]{{0,2},{1,7}},waitTime));
+			
+			addSequential(new blinkMany(new int[][]{{0,3},{1,6}},waitTime));
+			
+			addSequential(new blinkMany(new int[][]{{1,0},{1,5}},waitTime));
 		}
 	}
-	public void bothCaterpillar() //this will use the blinkTwo function
+	public void bothCaterpillar() //this will use the blinkMany function, this thing snakes
 	{
 		for (int i = 0; i < iterations; i++)
 		{
 			double waitTime = 0.2;
 			
 			//bottom tier
-			addSequential(new blinkTwo(1,1,0,0,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,4},{1,5},{0,0}},waitTime));
 			
 			//tier 2
-			addSequential(new blinkTwo(1,2,0,1,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,5},{1,6},{0,1}},waitTime));
 			
 			//tier 3
-			addSequential(new blinkTwo(1,3,0,2,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,6},{1,7},{0,2}},waitTime));
 			
 			//tier 4
-			addSequential(new blinkTwo(2,0,0,3,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,7},{2,4},{0,3}},waitTime));
 			
 			//tier 5
-			addSequential(new blinkTwo(2,1,1,0,waitTime));
+			addSequential(new blinkMany(new int[][]{{1,4},{2,5},{1,0}},waitTime));
+			
+			//tier 4
+			addSequential(new blinkMany(new int[][]{{0,7},{2,4},{0,3}},waitTime));
+			
+			//tier 3
+			addSequential(new blinkMany(new int[][]{{0,6},{1,7},{0,2}},waitTime));
+			
+			//tier 2
+			addSequential(new blinkMany(new int[][]{{0,5},{1,6},{0,1}},waitTime));
 		}
 	}
-	public void rayCaterpillar() //blinkTwo function here!
+	/*public void rayCaterpillar() //blinkTwo function here!
 	{
 		addSequential(new lightUpTower());
 		for (int i = 0; i < iterations; i++)
@@ -181,31 +185,31 @@ public class lightUpGroup extends CommandGroup {
 			double waitTime = 0.2;
 			
 			//bottom tier
-			addSequential(new blinkTwo(0,4,1,5,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,4},{1,5}},waitTime));
 			
 			//tier 2
-			addSequential(new blinkTwo(0,5,1,6,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,5},{1,6}},waitTime));
 			
 			//tier 3
-			addSequential(new blinkTwo(0,6,1,7,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,6},{1,7}},waitTime));
 			
 			//tier 4
-			addSequential(new blinkTwo(0,7,2,4,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,7},{2,4}},waitTime));
 			
 			//tier 5
-			addSequential(new blinkTwo(1,4,2,5,waitTime));
+			addSequential(new blinkMany(new int[][]{{1,4},{2,5}},waitTime));
 			
 			//back down
 			//tier 4
-			addSequential(new blinkTwo(0,7,2,4,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,7},{2,4}},waitTime));
 			//tier 3
-			addSequential(new blinkTwo(0,6,1,7,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,6},{1,7}},waitTime));
 			//tier 2
-			addSequential(new blinkTwo(0,5,1,6,waitTime));
+			addSequential(new blinkMany(new int[][]{{0,5},{1,6}},waitTime));
 		}
 		addSequential(new lightDarkAll());
-	}
-	public void trueTowerCaterpillar() //it's actually not
+	}*/
+	/*public void trueTowerCaterpillar() //it's actually not
 	{
 		for (int i = 0; i < iterations; i++)
 		{
@@ -244,11 +248,26 @@ public class lightUpGroup extends CommandGroup {
 			addSequential(new lightDark(0,0));
 			//addSequential(new Wait(1));
 		}
+	}*/
+	public void bothDown() //tower starts from top and goes down.  does not caterpillar, just goes down.
+	{					   //rays start at top and go down both sides.  no caterpillar either
+		double waitTime = 0.2;
+		for (int i = 0;i<iterations;i++)
+		{
+			addSequential(new blinkMany(new int[][]{{1,0},{1,4},{2,5}},waitTime));
+			addSequential(new blinkMany(new int[][]{{0,3},{0,7},{2,4}},waitTime));
+			addSequential(new blinkMany(new int[][]{{0,2},{0,6},{1,7}},waitTime));
+			addSequential(new blinkMany(new int[][]{{0,1},{0,5},{1,6}},waitTime));
+			addSequential(new blinkMany(new int[][]{{0,0},{0,4},{1,5}},waitTime));
+		}
 	}
-	public void test()
-	{
-		new Solenoid(0,7).set(true);
-		addSequential(new lightUp(0,0));
+	public void skipLight() //tower tiers 1 and 3 light up first, then 2 and 4 light up
+	{						// ditto for the rays
+		for (int i = 0;i < iterations;i++)
+		{
+			double waitTime = 0.2;
+			addSequential(new blinkMany(new int[][]{{0,0},{0,2},{0,4},{0,6},{1,5},{1,7}},waitTime));
+			addSequential(new blinkMany(new int[][]{{0,1},{0,3},{0,5},{0,7},{1,6},{2,4}},waitTime));
+		}
 	}
-	
 }

@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1160.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -9,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1160.robot.commands.lightUpGroup;
+import org.usfirst.frc.team1160.robot.commands.runSequence;
 import org.usfirst.frc.team1160.robot.commands.light.lightUp;
 import org.usfirst.frc.team1160.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1160.robot.subsystems.LightSystem;
@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot {
 			
 		
 		
-		autonomousCommand = new lightUpGroup(5,100);
+		autonomousCommand = new runSequence();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

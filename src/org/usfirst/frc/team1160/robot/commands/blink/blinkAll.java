@@ -11,10 +11,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class blinkAll extends CommandGroup {
 
-    public blinkAll(int waitTime) { //this assumes that the lights are on to begin with
-    	addSequential(new lightDarkAll());
-    	addSequential(new Wait(waitTime));
-    	addSequential(new lightUpAll());
+    public blinkAll(int iterations,int waitTime) { //this assumes that the lights are on to begin with
+    	for (int i = 0;i < iterations;i++)
+    	{
+    		addSequential(new lightDarkAll());
+	    	addSequential(new Wait(waitTime));
+	    	addSequential(new lightUpAll());
+    	}
         
     }
 }
