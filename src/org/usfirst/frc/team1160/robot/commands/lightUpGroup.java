@@ -1,5 +1,6 @@
  package org.usfirst.frc.team1160.robot.commands;
 
+import org.usfirst.frc.team1160.robot.Robot;
 import org.usfirst.frc.team1160.robot.commands.blink.blink;
 import org.usfirst.frc.team1160.robot.commands.blink.blinkAll;
 import org.usfirst.frc.team1160.robot.commands.blink.blinkTwo;
@@ -8,6 +9,7 @@ import org.usfirst.frc.team1160.robot.commands.light.lightDarkAll;
 import org.usfirst.frc.team1160.robot.commands.light.lightUp;
 import org.usfirst.frc.team1160.robot.commands.light.lightUpAll;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -15,11 +17,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class lightUpGroup extends CommandGroup {
 
-	private int sequence;
 	private int iterations;
 	
     public lightUpGroup(int sequence,int iterations) {
-    	this.sequence = sequence;
     	this.iterations = iterations;
     	switch (sequence)
     	{
@@ -44,10 +44,13 @@ public class lightUpGroup extends CommandGroup {
     		case 7:
     			trueTowerCaterpillar();
     			break;
+    		case 8:
+    			test();
+    			break;
     			
     	}
     }
-	public void sequenceOne() //light up bottom tier to top tier, then blink for a bit
+	public void sequenceOne() //light up bottom tier to top tier, then the rays in the same order, then blink for a bit
 	{
 		for (int i = 0; i < iterations; i++)
 		{
@@ -76,26 +79,26 @@ public class lightUpGroup extends CommandGroup {
 			//sequence is over!
 			//addSequential(new lightDarkAll());
 			
-			//now for the rays
+			//now for the rays, which use pcm 4-7
 			
-			addSequential(new lightUp(1,1));
-			//addSequential(new lightUp(2,2));
+			addSequential(new lightUp(0,4));
+			addSequential(new lightUp(1,5));
 			addSequential(new Wait(waitTime));		
 			
-			addSequential(new lightUp(1,2));
-			//addSequential(new lightUp(2,3));
+			addSequential(new lightUp(0,5));
+			addSequential(new lightUp(1,6));
 			addSequential(new Wait(waitTime));
 			
-			addSequential(new lightUp(1,3));
-			//addSequential(new lightUp(3,0));
+			addSequential(new lightUp(0,6));
+			addSequential(new lightUp(1,7));
 			addSequential(new Wait(waitTime));	
 			
-			addSequential(new lightUp(2,0));
-			//addSequential(new lightUp(3,1));
+			addSequential(new lightUp(0,7));
+			addSequential(new lightUp(2,4));
 			addSequential(new Wait(waitTime));	
 			
-			addSequential(new lightUp(2,1));
-			//addSequential(new lightUp(3,2));
+			addSequential(new lightUp(1,4));
+			addSequential(new lightUp(2,5));
 			addSequential(new Wait(waitTime));
 			
 			//blink
@@ -110,12 +113,7 @@ public class lightUpGroup extends CommandGroup {
 	}
 	public void sequenceTwo()
 	{
-		for (int i = 0; i < iterations; i++)
-		{
-			addSequential(new lightUp(0,0));
-			//rest of sequence goes here
-			addSequential(new Wait(5));
-		}
+		//for (int i = 0)
 	}
 	public void sequenceAll()
 	{
@@ -123,12 +121,13 @@ public class lightUpGroup extends CommandGroup {
 	}
 	public void towerCaterpillar()
 	{
+		addSequential(new blink(0,0,0.2));
 		for (int i = 0; i < iterations; i++)
 		{
 			double waitTime = 0.2;
 			
 			//bottom tier
-			addSequential(new blink(0,0,waitTime));
+			//addSequential(new blink(0,0,waitTime));
 			
 			//tier 2
 			addSequential(new blink(0,1,waitTime));
@@ -193,7 +192,7 @@ public class lightUpGroup extends CommandGroup {
 			addSequential(new blink(2,1,waitTime));
 		}
 	}
-	public void trueTowerCaterpillar()
+	public void trueTowerCaterpillar() //it's actually not
 	{
 		for (int i = 0; i < iterations; i++)
 		{
@@ -230,8 +229,13 @@ public class lightUpGroup extends CommandGroup {
 			addSequential(new Wait(1));
 			
 			addSequential(new lightDark(0,0));
-			addSequential(new Wait(1));
+			//addSequential(new Wait(1));
 		}
+	}
+	public void test()
+	{
+		new Solenoid(0,7).set(true);
+		addSequential(new lightUp(0,0));
 	}
 	
 }

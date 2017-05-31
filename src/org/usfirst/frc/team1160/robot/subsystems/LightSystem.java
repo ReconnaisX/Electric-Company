@@ -15,18 +15,10 @@ public class LightSystem extends Subsystem {
 
 	private LightSystem()
 	{
-		array = new TimedLED[3][4];
+		array = new TimedLED[3][8];
 		for (int i = 0; i < 3; i++)
 		{
-			if (i == 2)
-			{
-				for (int j = 0; j < 2; j++)
-				{
-					array[i][j] = new TimedLED(i,j);
-				}
-				break;
-			}
-			for (int j = 0; j < 4; j++)
+			for (int j = 0; j < 8; j++)
 			{
 				array[i][j] = new TimedLED(i,j);
 			}
@@ -64,15 +56,7 @@ public class LightSystem extends Subsystem {
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			if (i == 2)
-			{
-				for (int j = 0; j < 2; j++)
-				{
-					array[i][j].light();
-				}
-				break;
-			}
-			for (int j = 0; j < 4; j++)
+			for (int j = 0; j < 8; j++)
 			{
 				array[i][j].light();
 			}
@@ -82,15 +66,7 @@ public class LightSystem extends Subsystem {
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			if (i == 2)
-			{
-				for (int j = 0; j < 2; j++)
-				{
-					array[i][j].dark();
-				}
-				break;
-			}
-			for (int j = 0; j < 4; j++)
+			for (int j = 0; j < 8; j++)
 			{
 				array[i][j].dark();
 			}

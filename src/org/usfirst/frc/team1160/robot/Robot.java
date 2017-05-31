@@ -76,9 +76,12 @@ public class Robot extends IterativeRobot {
 		//1: default sequence
 		//2: unused
 		//3: turn all lights on
+			//constant
 		//4: tower caterpillar
 		//5: ray caterpillar
 		//6: both caterpillar
+		//7: true caterpillar
+			
 		
 		
 		autonomousCommand = new lightUpGroup(4,100);
