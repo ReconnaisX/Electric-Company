@@ -4,7 +4,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * A LightSystem object is basically an array of TimedLEDs (for organizational purposes; 
+ * I am not declaring and initializing twenty four separate TimedLED objects) plus a Timer object.
+ * If I did this over, I would put allLight() and allDark() as distinct commands instead of
+ * writing them as subsystem methods.  It works but it's not 100% clean.
  */
 public class LightSystem extends Subsystem {
 

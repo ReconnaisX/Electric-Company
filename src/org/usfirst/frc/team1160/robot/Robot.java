@@ -14,11 +14,13 @@ import org.usfirst.frc.team1160.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1160.robot.subsystems.LightSystem;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
+ * CURRENT ISSUES: 5/31/17
+ *  - runSequence has a habit of just defaulting to choice = 2 and then crashing
+ *  - you can use autonomousCommand.start() in the autonomousPeriodic() function in this file to alleviate
+ *  that issue but it just ends up restarting after choice #2 crash
+ *  - choice always ends up at #2--- why?
+ *  - blinkAll might be the culprit
+ *  - alternatively, the hardware limitations might be the cause
  */
 public class Robot extends IterativeRobot {
 
@@ -104,6 +106,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		if (autonomousCommand == null)
+		{
+			autonomousCommand = new runSequence();
+			autonomousCommand.start();
+		}
+		
 	}
 
 	@Override

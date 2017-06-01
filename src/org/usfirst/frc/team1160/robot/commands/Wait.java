@@ -3,7 +3,9 @@ package org.usfirst.frc.team1160.robot.commands;
 import org.usfirst.frc.team1160.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+/**
+ * Classic wait code, copied straight from the t-shirt cannon.  Good stuff.
+ */
 public class Wait extends Command{
 
 	private double finTime;

@@ -5,7 +5,7 @@ import org.usfirst.frc.team1160.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turn off all TimedLEDs.
  */
 public class lightDarkAll extends Command {
 	

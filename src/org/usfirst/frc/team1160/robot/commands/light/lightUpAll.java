@@ -5,7 +5,7 @@ import org.usfirst.frc.team1160.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Toggles many TimedLEDs on.
  */
 public class lightUpAll extends Command {
 	

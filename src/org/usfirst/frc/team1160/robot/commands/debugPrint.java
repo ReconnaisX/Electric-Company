@@ -1,32 +1,26 @@
-package org.usfirst.frc.team1160.robot.commands.light;
-
-import org.usfirst.frc.team1160.robot.Robot;
+package org.usfirst.frc.team1160.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Turns a TimedLED on.
+ *
  */
-public class lightUp extends Command {
-	
-	private int x;
-	private int y;
-	
-    public lightUp(int x,int y) {
-        requires(Robot.lights);
-        this.x = x;
-        this.y = y;
+public class debugPrint extends Command {
+
+	String str;
+    public debugPrint(String str) {
+    	this.str = str;
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.print(x + " " + y + ", ");
-    	Robot.lights.array[x][y].light();
+    	System.out.println(str);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

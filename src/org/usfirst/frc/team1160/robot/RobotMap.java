@@ -1,10 +1,8 @@
 package org.usfirst.frc.team1160.robot;
 
 /**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
+ * I relied on the LightSystem object to carry my variables around, so no need for this.
+ * Maybe next time.
  */
 public class RobotMap {
 	// For example to map the left and right motors, you could define the

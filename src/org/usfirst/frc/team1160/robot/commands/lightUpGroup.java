@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * This class houses ALL of the light up sequences.
+ * If I did this over, I would use individual command files for each of the sequences.
+ * Oh well.
  */
 public class lightUpGroup extends CommandGroup {
 
@@ -46,7 +48,9 @@ public class lightUpGroup extends CommandGroup {
 	{
 		for (int i = 0; i < iterations; i++)
 		{
-			int waitTime = (int)(Math.random()*2)+1;
+			
+			addSequential(new debugPrint("On iteration " + (i+1) + " of " + (iterations) + " of the default sequence.\n"));
+			double waitTime = Math.random()+1;
 			
 			//bottom tier
 			addSequential(new lightUp(0,0));
@@ -117,7 +121,8 @@ public class lightUpGroup extends CommandGroup {
 		
 		for (int i = 0; i < iterations; i++)
 		{
-			double waitTime = 0.2;
+			addSequential(new debugPrint("On iteration " + (i+1) + " of " + (iterations) + " of the clockwise rays sequence.\n"));
+			double waitTime = 0.5;
 			
 			//bottom tier
 			addSequential(new blinkMany(new int[][]{{0,0},{0,4}},waitTime));
@@ -150,6 +155,7 @@ public class lightUpGroup extends CommandGroup {
 	{
 		for (int i = 0; i < iterations; i++)
 		{
+			addSequential(new debugPrint("On iteration " + (i+1) + " of " + (iterations) + " of the bothCaterpillar sequence.\n"));
 			double waitTime = 0.2;
 			
 			//bottom tier
@@ -254,6 +260,7 @@ public class lightUpGroup extends CommandGroup {
 		double waitTime = 0.2;
 		for (int i = 0;i<iterations;i++)
 		{
+			addSequential(new debugPrint("On iteration " + (i+1) + " of " + (iterations) + " of the bothDown sequence.\n"));
 			addSequential(new blinkMany(new int[][]{{1,0},{1,4},{2,5}},waitTime));
 			addSequential(new blinkMany(new int[][]{{0,3},{0,7},{2,4}},waitTime));
 			addSequential(new blinkMany(new int[][]{{0,2},{0,6},{1,7}},waitTime));
@@ -265,6 +272,7 @@ public class lightUpGroup extends CommandGroup {
 	{						// ditto for the rays
 		for (int i = 0;i < iterations;i++)
 		{
+			addSequential(new debugPrint("On iteration " + (i+1) + " of " + (iterations) + " of the skipLight sequence.\n"));
 			double waitTime = 0.2;
 			addSequential(new blinkMany(new int[][]{{0,0},{0,2},{0,4},{0,6},{1,5},{1,7}},waitTime));
 			addSequential(new blinkMany(new int[][]{{0,1},{0,3},{0,5},{0,7},{1,6},{2,4}},waitTime));
