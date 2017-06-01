@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1160.robot.commands.blink;
 
 import org.usfirst.frc.team1160.robot.commands.Wait;
+import org.usfirst.frc.team1160.robot.commands.debugPrint;
 import org.usfirst.frc.team1160.robot.commands.light.lightDark;
 import org.usfirst.frc.team1160.robot.commands.light.lightUp;
 
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class blinkMany extends CommandGroup {
 
     public blinkMany(int[][] arr,double waitTime) {
-    	System.out.println("BlinkingMany");
+    	addSequential(new debugPrint("BlinkingMany"));
        for (int i = 0;i<arr.length;i++)
        {
     	   addSequential(new lightUp(arr[i][0],arr[i][1]));

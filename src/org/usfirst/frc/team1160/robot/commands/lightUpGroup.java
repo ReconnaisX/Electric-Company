@@ -50,7 +50,7 @@ public class lightUpGroup extends CommandGroup {
 		{
 			
 			addSequential(new debugPrint("On iteration " + (i+1) + " of " + (iterations) + " of the default sequence.\n"));
-			double waitTime = Math.random()+1;
+			double waitTime = Math.random()*0.5+0.5;
 			
 			//bottom tier
 			addSequential(new lightUp(0,0));

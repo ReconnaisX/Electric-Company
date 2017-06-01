@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1160.robot.commands;
 
+import org.usfirst.frc.team1160.robot.Robot;
 import org.usfirst.frc.team1160.robot.commands.blink.blinkAll;
+import org.usfirst.frc.team1160.robot.commands.light.lightDarkAll;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -13,9 +15,11 @@ public class runSequence extends CommandGroup {
 	int choice;
 	int i; //number of iterations
 	int bigI; //number of iterations of the command block //note to programming: ask kyle to explain
+	boolean done; //is it done yet
     public runSequence() {
-    	/*addSequential(new lightUpGroup(1,3));
-    	for (int i = 0;i<4;i++)
+    	requires(Robot.lights);
+    	//addSequential(new lightUpGroup(1,3));
+    	/*for (int i = 0;i<4;i++)
     	{
     		for (int j = 0;j<5;j++)
     		{
@@ -28,9 +32,10 @@ public class runSequence extends CommandGroup {
     	}
     }*/
     	bigI = 0;
+    	done = false;
     	addSequential(new lightUpGroup(1,3));
-    	//for (int xy = 0;xy<100;xy++)
-    	//{
+    	for (int xy = 0;xy<10;xy++)
+    	{
     		addSequential(new debugPrint("I got here"));
     		choice = (int)(Math.random()*(4+1) + 1);
     		if (choice == 6)
@@ -57,15 +62,20 @@ public class runSequence extends CommandGroup {
     			
     		}
     		addSequential(new lightUpGroup(choice,i));
-    		addSequential(new blinkAll(3,1));
+    		//addSequential(new blinkAll(3,1));
     		addSequential(new debugPrint("Successfully finished blink!"));
+    		addSequential(new lightDarkAll());
     		bigI++;
     		if (bigI == 10)
     		{
     			addSequential(new debugPrint("Taking a break!"));
     			addSequential(new Wait(30)); //take a break for thirty seconds!
-    			bigI = 0;
+    			done = true;
     		}
-    	//}
+    	}
     }
+    /*protected boolean isFinished()
+    {
+    	return done;
+    }*/
 }

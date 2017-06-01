@@ -21,6 +21,9 @@ import org.usfirst.frc.team1160.robot.subsystems.LightSystem;
  *  - choice always ends up at #2--- why?
  *  - blinkAll might be the culprit
  *  - alternatively, the hardware limitations might be the cause
+ *  
+ *  6/1/17
+ *  - everything should be fixed, run sequence will run 10x within and autonomousPeriodic() will revive it.
  */
 public class Robot extends IterativeRobot {
 
@@ -109,6 +112,10 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand == null)
 		{
 			autonomousCommand = new runSequence();
+			autonomousCommand.start();
+		}
+		else
+		{
 			autonomousCommand.start();
 		}
 		
